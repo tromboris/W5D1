@@ -50,11 +50,6 @@ class IntSet
   def [](index)
     store[index % size] 
   end
-
-  # def []==(index, num)
-  #   store[index % size] == num
-  # end
-
   
   def include?(num)
     self[num].each do |int|
@@ -74,25 +69,33 @@ class IntSet
 
   private
 
-  def [](num)
-    # optional but useful; return the bucket corresponding to `num`
-  end
+  # def [](num)
+  #   # optional but useful; return the bucket corresponding to `num`
+  # end
 
-  def num_buckets
-    @store.length
-  end
+  # def num_buckets
+  #   @store.length
+  # end
 end
 
 class ResizingIntSet
-  attr_reader :count
+  attr_reader :store, :size, :count
 
   def initialize(num_buckets = 20)
     @store = Array.new(num_buckets) { Array.new }
     @count = 0
+    @size = num_buckets
+  end
+
+  def [](index)
+    store[index % size] 
   end
 
   def insert(num)
-
+    unless self[num].include?(num)
+      self[num] << num
+      @count += 1
+    end
   end
 
   def remove(num)
@@ -100,14 +103,17 @@ class ResizingIntSet
   end
 
   def include?(num)
-
+    self[num].each do |int|
+      return true if int == num      
+    end
+    false
   end
 
   private
 
-  def [](num)
-    # optional but useful; return the bucket corresponding to `num`
-  end
+  # def [](num)
+  #   # optional but useful; return the bucket corresponding to `num`
+  # end
 
   def num_buckets
     @store.length
