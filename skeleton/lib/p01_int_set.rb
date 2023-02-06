@@ -80,6 +80,7 @@ end
 
 class ResizingIntSet
   attr_reader :store, :size, :count
+  # attr_accessor :count
 
   def initialize(num_buckets = 20)
     @store = Array.new(num_buckets) { Array.new }
@@ -99,7 +100,7 @@ class ResizingIntSet
   end
 
   def remove(num)
-
+    self[num].include?(num) ? (self[num].delete(num) ; @count -= 1) : nil
   end
 
   def include?(num)
@@ -120,6 +121,7 @@ class ResizingIntSet
   end
 
   def resize!
+    
   end
 end
 
