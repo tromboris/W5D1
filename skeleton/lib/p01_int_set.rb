@@ -1,3 +1,4 @@
+
 class MaxIntSet
 
   attr_accessor :store
@@ -45,21 +46,29 @@ class IntSet
     @store = Array.new(num_buckets) { Array.new }
     @size = num_buckets
   end
+
+  def [](index)
+    store[index % size] 
+  end
+
+  # def []==(index, num)
+  #   store[index % size] == num
+  # end
+
   
-
-
   def include?(num)
-
-    store[num % size].include?(num)
-    
+    self[num].each do |int|
+      return true if int == num      
+    end
+    false
   end
   
   def insert(num)
-    store[num % size] << num
+    self[num] << num
   end
 
   def remove(num)
-    store[num % size].delete(num)
+    self[num].delete(num)
   end
 
 
@@ -83,12 +92,15 @@ class ResizingIntSet
   end
 
   def insert(num)
+
   end
 
   def remove(num)
+
   end
 
   def include?(num)
+
   end
 
   private
@@ -104,6 +116,15 @@ class ResizingIntSet
   def resize!
   end
 end
+
+
+
+# a = IntSet.new
+
+# # a.insert(5)
+# p a[5]
+
+# p a
 
 
 
