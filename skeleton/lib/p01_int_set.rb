@@ -11,42 +11,57 @@ class MaxIntSet
   end
   
   def include?(num)
-    raise "size too too big" if num > size - 1 
+    raise "Out of bounds" if num < 0 || num > size - 1
     return store[num]
   end
 
   def insert(num)
-    raise "size too small" if num < 0 || num > size - 1
+    raise "Out of bounds" if num < 0 || num > size - 1
     store[num] = true
   end
 
   def remove(num)
+    raise "Out of bounds" if num < 0 || num > size - 1
+    store[num] = false
   end
 
 
   private
 
   def is_valid?(num)
+    num.between?(0, size-1)
   end
 
   def validate!(num)
+    
   end
 end
 
 
 class IntSet
+  attr_reader :store, :size
+  
   def initialize(num_buckets = 20)
     @store = Array.new(num_buckets) { Array.new }
+    @size = num_buckets
   end
+  
 
+
+  def include?(num)
+
+    store[num % size].include?(num)
+    
+  end
+  
   def insert(num)
+    store[num % size] << num
   end
 
   def remove(num)
+    store[num % size].delete(num)
   end
 
-  def include?(num)
-  end
 
   private
 
