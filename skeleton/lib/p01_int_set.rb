@@ -1,16 +1,28 @@
 class MaxIntSet
+
+  attr_accessor :store
+
   def initialize(max)
-    
+    @store = Array.new(max) {false}
+  end
+
+  def size
+    @store.length
+  end
+  
+  def include?(num)
+    raise "size too too big" if num > size - 1 
+    return store[num]
   end
 
   def insert(num)
+    raise "size too small" if num < 0 || num > size - 1
+    store[num] = true
   end
 
   def remove(num)
   end
 
-  def include?(num)
-  end
 
   private
 
@@ -77,3 +89,7 @@ class ResizingIntSet
   def resize!
   end
 end
+
+
+
+
