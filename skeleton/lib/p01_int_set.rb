@@ -1,4 +1,5 @@
 
+require "byebug"
 class MaxIntSet
 
   attr_accessor :store
@@ -52,6 +53,7 @@ class IntSet
   end
   
   def include?(num)
+    # debugger
     self[num].each do |int|
       return true if int == num      
     end
@@ -69,6 +71,9 @@ class IntSet
 
   private
 
+  # def [](num)
+  #   # optional but useful; return the bucket corresponding to `num`
+  # end
   # def [](num)
   #   # optional but useful; return the bucket corresponding to `num`
   # end
@@ -111,6 +116,9 @@ class ResizingIntSet
 
   private
 
+  # def [](num)
+  #   # optional but useful; return the bucket corresponding to `num`
+  # end
   # def [](num)
   #   # optional but useful; return the bucket corresponding to `num`
   # end
